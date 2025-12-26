@@ -1,0 +1,38 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ansible
+*.retry
+*.log
+inventory.ini
+# Evitar subir claves privadas SSH usadas por Ansible (Vital seguridad)
+*.pem
+*.key
+id_rsa
+
+# Python (Ansible dependencies)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# IDEs & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets safeguards (Evitar fugas)
+.env
+*.secret
+secrets.tfvars
