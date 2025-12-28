@@ -16,7 +16,7 @@ yum install -y ansible git htop
 echo "QC Clonando repositorio..."
 mkdir -p /opt/ws-ansible
 # NOTA: Usamos tu repo público
-git clone https://github.com/jgaragorry/WS-HA-AutoScaling-Ansible.git /opt/ws-ansible
+git clone  https://github.com/jgaragorry/aws-self-healing-architecture.git /opt/ws-ansible
 
 # 4. Ejecutar Ansible Playbook
 echo "🎭 Ejecutando Ansible..."
