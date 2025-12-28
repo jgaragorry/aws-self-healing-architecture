@@ -1,0 +1,6 @@
+---
+http_port: 80
+server_name: "aws-ha-demo"
+welcome_message: "Bienvenido al Workshop 5 - High Availability & Auto Scaling"
+bg_color: "#232f3e" # AWS Dark Blue
+font_color: "#ffffff"

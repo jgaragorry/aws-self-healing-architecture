@@ -1,0 +1,50 @@
+---
+- name: Instalar Nginx (Amazon Linux 2 / CentOS)
+  yum:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Habilitar e iniciar Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Obtener metadatos de la instancia (IMDSv2) para mostrar IP/ID
+  shell: |
+    TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && \
+    curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id
+  register: instance_id_output
+  ignore_errors: true # Para que funcione en local testing sin AWS
+
+- name: Desplegar index.html personalizado
+  copy:
+    dest: /usr/share/nginx/html/index.html
+    mode: '0644'
+    content: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+          <title>{{ app_name }}</title>
+          <style>
+              body { background-color: {{ bg_color }}; color: {{ font_color }}; font-family: Arial, sans-serif; text-align: center; padding-top: 50px; }
+              .container { border: 2px solid white; padding: 20px; width: 50%; margin: 0 auto; border-radius: 10px; }
+              h1 { color: #FF9900; }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              <h1>🚀 {{ welcome_message }}</h1>
+              <p>Environment: <strong>{{ environment_tier }}</strong></p>
+              <hr>
+              <p>Este tráfico está siendo servido por la instancia:</p>
+              <h2>{{ instance_id_output.stdout | default('Local-Test-Machine') }}</h2>
+              <p><i>(Si refrescas y esto cambia, el Load Balancer está funcionando)</i></p>
+          </div>
+      </body>
+      </html>
+
+- name: Asegurar permisos de firewall (Si firewalld está activo)
+  shell: "systemctl is-active firewalld && firewall-cmd --permanent --add-service=http && firewall-cmd --reload || echo 'Firewalld not running'"
+  ignore_errors: true

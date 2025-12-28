@@ -1,0 +1,13 @@
+---
+- name: Configurar Web Servers de Alta Disponibilidad
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+
+  vars:
+    app_name: "WS-HA-Enterprise-Demo"
+    environment_tier: "Production"
+
+  roles:
+    - webserver
