@@ -23,28 +23,28 @@ Este proyecto despliega una **Arquitectura de Referencia Empresarial (3-Tier Arc
 
 ```mermaid
 graph TD
-    User((🌐 Internet User)) --> ALB[Application Load Balancer]
+    User(("🌐 Internet User")) --> ALB["Application Load Balancer"]
     
     subgraph VPC ["AWS Cloud (us-east-1)"]
         subgraph Public_Subnets ["Public Zone"]
             ALB
-            NAT[NAT Gateway]
+            NAT["NAT Gateway"]
         end
         
         subgraph Private_Subnets ["Private Zone (Secure)"]
-            ASG[Auto Scaling Group]
-            EC2_1[EC2 Instance A]
-            EC2_2[EC2 Instance B]
-            RDS[(RDS MySQL Database)]
+            ASG["Auto Scaling Group"]
+            EC2_1["EC2 Instance A"]
+            EC2_2["EC2 Instance B"]
+            RDS[("RDS MySQL Database")]
         end
     end
     
     ALB -->|Traffic Dist| ASG
     ASG --> EC2_1
     ASG --> EC2_2
-    EC2_1 & EC2_2 -->|Pull Config| GitHub[GitHub Repo (Ansible)]
+    EC2_1 & EC2_2 -->|"Pull Config"| GitHub["GitHub Repo (Ansible)"]
     EC2_1 & EC2_2 -->|SQL| RDS
-    EC2_1 & EC2_2 -->|Outbound Updates| NAT
+    EC2_1 & EC2_2 -->|"Outbound Updates"| NAT
 ```
 
 ---
