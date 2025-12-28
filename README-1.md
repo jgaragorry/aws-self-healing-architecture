@@ -25,13 +25,13 @@ Este proyecto despliega una **Arquitectura de Referencia Empresarial (3-Tier Arc
 graph TD
     User((🌐 Internet User)) --> ALB[Application Load Balancer]
     
-    subgraph VPC [AWS Cloud (us-east-1)]
-        subgraph Public_Subnets [Public Zone]
+    subgraph VPC ["AWS Cloud (us-east-1)"]
+        subgraph Public_Subnets ["Public Zone"]
             ALB
             NAT[NAT Gateway]
         end
         
-        subgraph Private_Subnets [Private Zone (Secure)]
+        subgraph Private_Subnets ["Private Zone (Secure)"]
             ASG[Auto Scaling Group]
             EC2_1[EC2 Instance A]
             EC2_2[EC2 Instance B]
