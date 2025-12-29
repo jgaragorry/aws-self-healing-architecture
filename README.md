@@ -1,4 +1,4 @@
-# 🚀 WS-HA-AutoScaling-Ansible: Enterprise High Availability on AWS
+# 🚀 HA-AutoScaling-Ansible: Enterprise High Availability on AWS
 
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
